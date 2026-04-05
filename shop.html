@@ -10,14 +10,80 @@
             margin: 0;
             color: white;
         }
+        
+    /* ══ NAVBAR ══ */
+    .navbar {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 68px;
+      background: rgba(30,41,59,0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(56,189,248,0.15);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    }
 
-        header {
-            background-color: #1e293b; /* Lighter Navy from Nav */
-            color: #38bdf8;           /* Sky Blue Accent */
-            padding: 25px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    .logo {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 26px; font-weight: 700;
+      color: var(--sky); letter-spacing: 1px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .logo span { color: var(--white); }
+
+    .nav-links { display: flex; align-items: center; gap: 6px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--white);
+      font-size: 14px; font-weight: 500;
+      padding: 8px 18px; border-radius: 25px;
+      transition: background 0.25s, color 0.25s, transform 0.2s;
+    }
+    .nav-links a:hover { background: var(--mid); transform: translateY(-1px); }
+    .nav-links a.active { background: var(--sky); color: var(--dark); font-weight: 600; }
+
+    .nav-search {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--mid); border-radius: 25px;
+      padding: 7px 16px; border: 1px solid transparent;
+      transition: border 0.3s;
+    }
+    .nav-search:focus-within { border-color: var(--sky); }
+    .nav-search input {
+      background: none; border: none; outline: none;
+      color: var(--white); font-size: 13px;
+      font-family: 'Outfit', sans-serif; width: 160px;
+    }
+    .nav-search input::placeholder { color: var(--light); }
+    .nav-search svg { color: var(--light); flex-shrink: 0; }
+
+    .nav-cart {
+      position: relative; cursor: pointer;
+      font-size: 22px; padding: 8px; border-radius: 50%;
+      transition: background 0.2s;
+    }
+    .nav-cart:hover { background: var(--mid); }
+    .cart-badge {
+      position: absolute; top: 2px; right: 2px;
+      background: var(--sky); color: var(--dark);
+      font-size: 10px; font-weight: 700;
+      width: 16px; height: 16px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.3s; }
+
+    .mobile-menu {
+      display: none; flex-direction: column;
+      background: var(--panel); border-top: 1px solid var(--mid);
+      padding: 16px 24px; gap: 4px;
+    }
+    .mobile-menu a {
+      text-decoration: none; color: var(--white);
+      font-size: 15px; padding: 10px 14px; border-radius: 10px;
+      transition: background 0.2s;
+    }
+    .mobile-menu a:hover, .mobile-menu a.active { background: var(--sky); color: var(--dark); font-weight: 600; }
+    .mobile-menu.open { display: flex; }
 
         .container {
             display: flex;
