@@ -320,10 +320,56 @@ td:first-child { font-weight: 600; color: #1a1a1a; }
     <footer>
         &copy; 2026 My Online Shop
     </footer>
-<script>
+
+     <script>
+
   function toggleMenu() {
     const menu = document.getElementById('mobileMenu');
     menu.classList.toggle('open');
+  }
+
+    const track       = document.getElementById('track');
+    const dotsWrap    = document.getElementById('dots');
+    const progressBar = document.getElementById('progressBar');
+    const slides      = document.querySelectorAll('.slide');
+    const total       = slides.length;
+    const INTERVAL    = 3500;
+    let current = 0, autoTimer;
+
+    slides.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.classList.add('dot');
+      if (i === 0) d.classList.add('active');
+      d.addEventListener('click', () => { goTo(i); resetTimer(); });
+      dotsWrap.appendChild(d);
+    });
+
+    function goTo(index) {
+      current = (index + total) % total;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      document.querySelectorAll('.dot').forEach((d, i) =>
+        d.classList.toggle('active', i === current)
+      );
+      animateProgress();
+    }
+
+    function changeSlide(dir) { goTo(current + dir); resetTimer(); }
+
+    function animateProgress() {
+      progressBar.style.transition = 'none';
+      progressBar.style.width = '0%';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        progressBar.style.transition = `width ${INTERVAL}ms linear`;
+        progressBar.style.width = '100%';
+      }));
+    }
+
+    function startTimer() { autoTimer = setInterval(() => goTo(current + 1), INTERVAL); animateProgress(); }
+    function resetTimer()  { clearInterval(autoTimer); startTimer(); }
+
+    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+
+    startTimer();
   }
 </script>
 </body>
